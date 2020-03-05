@@ -7,10 +7,6 @@ const InputWrapper = styled.div`
  display: flex;
  margin-bottom: 2.5rem;
  flex-direction: column;
-
- &:last-of-type {
-  margin-bottom: 5.5rem;
- }
 `;
 const StyledInput = styled.input`
  padding: 1rem 2rem;
@@ -18,7 +14,7 @@ const StyledInput = styled.input`
  background-color: var(--color-mainLight);
  border: none;
  font-weight: 500;
- font-size: 1.2rem;
+ font-size: 1.5rem;
 
  &::placeholder {
   color: var(--color-white);

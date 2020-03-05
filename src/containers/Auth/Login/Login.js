@@ -1,11 +1,18 @@
-import React from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import React, {useEffect} from 'react';
+import {Formik, Field} from 'formik';
+import {connect} from 'react-redux';
+import styled from 'styled-components';
 import * as Yup from 'yup';
+import * as actions from '../../../store/actions';
 import {FormWrapper, StyledForm} from '../../../hoc/layout/elements';
 import Input from '../../../components/Ui/Forms/Input/Input';
 import Button from '../../../components/Ui/Forms/Button/Button';
-import Heading from '../../../components/Ui/Forms/Headings/Heading';
-
+import Heading from '../../../components/Ui/Headings/Heading';
+import Message from '../../../components/Ui/Message/Message';
+const MessageWrapper = styled.div`
+ position: absolute;
+ bottom: 0;
+`;
 const LoginSchema = Yup.object().shape({
  email: Yup.string()
   .email('invalid email')
@@ -15,11 +22,18 @@ const LoginSchema = Yup.object().shape({
   .min(5),
 });
 
-const Login = () => {
+const Login = ({login, loading, error, cleanUp}) => {
+ useEffect(() => {
+  return () => {
+   cleanUp();
+  };
+ }, [cleanUp]);
  return (
   <Formik
-   onSubmit={(values, {setSubmitting}) => {
+   onSubmit={async (values, {setSubmitting}) => {
     console.log(values);
+    await login(values);
+    setSubmitting(false);
    }}
    validationSchema={LoginSchema}
    initialValues={{email: '', password: ''}}
@@ -49,9 +63,19 @@ const Login = () => {
        placeholder='Your password ..'
       />
 
-      <Button disabled={!isValid} type='submit'>
+      <Button //
+       disabled={!isValid || isSubmitting}
+       loading={loading ? 'Logging  in' : null}
+       type='submit'
+      >
        lOGIN
       </Button>
+      <MessageWrapper>
+       <Message error show={error}>
+        {' '}
+        {error}
+       </Message>
+      </MessageWrapper>
      </StyledForm>
     </FormWrapper>
    )}
@@ -59,4 +83,13 @@ const Login = () => {
  );
 };
 
-export default Login;
+const mapStateToProps = ({auth}) => ({
+ loading: auth.loading,
+ error: auth.error,
+});
+const mapDispatchToProps = {
+ login: actions.signIn,
+ cleanUp: actions.cleanErrors,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

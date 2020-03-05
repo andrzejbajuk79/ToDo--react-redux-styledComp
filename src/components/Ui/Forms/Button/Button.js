@@ -11,6 +11,7 @@ const StyledButton = styled.button`
  box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
  background-color: var(--color-mainLighter);
  border: none;
+ margin: 1.5rem 0 3rem 0;
  transition: all 0.2a;
  &:hover {
   transform: translatyY(-3px);
@@ -24,10 +25,10 @@ const StyledButton = styled.button`
  }
 `;
 
-const Button = ({children, disabled, ...rest}) => {
+const Button = ({children, disabled, loading, ...rest}) => {
  return (
   <StyledButton {...rest} disabled={disabled}>
-   {children}
+   {loading ? loading : children}
   </StyledButton>
  );
 };

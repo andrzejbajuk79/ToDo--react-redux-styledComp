@@ -11,13 +11,22 @@ const Ul = styled.ul`
  height: 100%;
  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
 `;
-export const NavItems = ({mobile, clicked}) => {
- return (
-  <Nav>
+export const NavItems = ({mobile, clicked, loggedIn}) => {
+ let links;
+ if (loggedIn.uid) {
+  links = (
    <Ul mobile={mobile}>
     <NavItem clicked={clicked} mobile={mobile} link='/'>
-     Home
+     Todos
     </NavItem>
+    <NavItem clicked={clicked} mobile={mobile} link='/logout'>
+     Log Out
+    </NavItem>{' '}
+   </Ul>
+  );
+ } else {
+  links = (
+   <Ul mobile={mobile}>
     <NavItem clicked={clicked} mobile={mobile} link='signup'>
      Sign Up
     </NavItem>
@@ -25,6 +34,8 @@ export const NavItems = ({mobile, clicked}) => {
      Login
     </NavItem>
    </Ul>
-  </Nav>
- );
+  );
+ }
+
+ return <Nav>{links}</Nav>;
 };

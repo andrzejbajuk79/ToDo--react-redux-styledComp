@@ -27,4 +27,6 @@ export const StyledForm = styled(Form)`
  display: flex;
  width: 100%;
  flex-direction: column;
+ position: relative;
+ align-items: center;
 `;
