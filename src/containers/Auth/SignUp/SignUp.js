@@ -125,7 +125,7 @@ const mapStateToProps = ({auth}) => ({
 });
 
 const mapDispatchToProps = {
- SignUp: actions.signUp,
+ signUp: actions.signUp,
  cleanUp: actions.cleanErrors,
 };
 

@@ -8,9 +8,19 @@ import ToDos from './containers/ToDos/ToDos';
 import Login from './containers/Auth/Login/Login';
 import SignUp from './containers/Auth/SignUp/SignUp';
 import Logout from './containers/Auth/Logout/Logout';
-const App = ({loggedIn}) => {
+import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
+import RecoverPassword from './containers/Auth/RecoverPassword/RecoverPassword';
+const App = ({loggedIn, emailVerified}) => {
  let routes;
- if (loggedIn) {
+ if (loggedIn && !emailVerified) {
+  routes = (
+   <Switch>
+    <Route exact path='/verify-email' component={VerifyEmail} />
+    <Route exact path='/logout' component={Logout} />
+    <Redirect to='/verify-email' />{' '}
+   </Switch>
+  );
+ } else if (loggedIn && emailVerified) {
   routes = (
    <Switch>
     {' '}
@@ -25,6 +35,7 @@ const App = ({loggedIn}) => {
     {' '}
     <Route exact path='/login' component={Login} />
     <Route exact path='/signup' component={SignUp} />
+    <Route exact path='/recover' component={RecoverPassword} />
     <Redirect to='/login' />{' '}
    </Switch>
   );
@@ -34,7 +45,8 @@ const App = ({loggedIn}) => {
 };
 
 const mapStateToProps = ({firebase}) => ({
- loggedIn: firebase.auth.uid ? true : null,
+ loggedIn: firebase.auth.uid,
+ emailVerified: firebase.auth.emailVerified,
 });
 
 export default connect(mapStateToProps)(App);

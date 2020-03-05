@@ -1,1 +1,8 @@
-export {signUp, signOut, signIn, cleanErrors} from './AuthActions.js';
+export {
+ signUp,
+ signOut,
+ signIn,
+ cleanErrors,
+ verifyEmail,
+ recoverPassword,
+} from './AuthActions.js';
