@@ -10,6 +10,7 @@ import SignUp from './containers/Auth/SignUp/SignUp';
 import Logout from './containers/Auth/Logout/Logout';
 import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 import RecoverPassword from './containers/Auth/RecoverPassword/RecoverPassword';
+import Profile from './containers/Auth/Profile/Profile';
 const App = ({loggedIn, emailVerified}) => {
  let routes;
  if (loggedIn && !emailVerified) {
@@ -26,6 +27,7 @@ const App = ({loggedIn, emailVerified}) => {
     {' '}
     <Route exact path='/todos' component={ToDos} />
     <Route exact path='/logout' component={Logout} />
+    <Route exact path='/profile' component={Profile} />
     <Redirect to='/' />{' '}
    </Switch>
   );

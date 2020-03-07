@@ -16,8 +16,11 @@ export const NavItems = ({mobile, clicked, loggedIn}) => {
  if (loggedIn.uid) {
   links = (
    <Ul mobile={mobile}>
-    <NavItem clicked={clicked} mobile={mobile} link='/'>
+    <NavItem clicked={clicked} mobile={mobile} link='/todos'>
      Todos
+    </NavItem>
+    <NavItem clicked={clicked} mobile={mobile} link='/profile'>
+     Profile
     </NavItem>
     <NavItem clicked={clicked} mobile={mobile} link='/logout'>
      Log Out

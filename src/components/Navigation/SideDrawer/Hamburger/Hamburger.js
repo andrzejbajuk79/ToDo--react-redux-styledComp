@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import './hamburger.css';
-import {NavItems} from '../../NavItems/NavItems';
+// import {NavItems} from '../../NavItems/NavItems';
 
 const StyledHamb = styled.div`
  width: 30px;

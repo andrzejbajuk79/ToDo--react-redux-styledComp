@@ -93,3 +93,64 @@ export const recoverPassword = data => async (
   dispatch({type: actions.RECOVER_FAIL, payload: err.message});
  }
 };
+
+// Edycja profilu
+export const editProfile = data => async (
+ dispatch,
+ getState,
+ {getFirebase, getFirestore}
+) => {
+ //musimy miec dostep do firebase i firestore, poniewaz imie,nazwisko sa w firestore
+ // a haslo i email sa w firebase
+ const firebase = getFirebase();
+ const firestore = getFirestore();
+ const user = firebase.auth().currentUser;
+ const {uid: userId, email: userEmail} = getState().firebase.auth;
+
+ dispatch({type: actions.PROFILE_EDIT_START});
+ try {
+  //email
+  if (data.email !== userEmail) {
+   await user.updateEmail(data.email);
+  }
+  //dane personalne
+  await firestore
+   .collection('users')
+   .doc(userId)
+   .set({
+    firstName: data.firstName,
+    lastName: data.lastName,
+   });
+  //haslo
+  if (data.password.length > 0) {
+   await user.updatePassword(data.password);
+  }
+
+  dispatch({type: actions.PROFILE_EDIT_SUCCESS});
+ } catch (err) {
+  console.error(err.message);
+  dispatch({type: actions.PROFILE_EDIT_FAIL, payload: err.message});
+ }
+};
+
+// Delete user
+export const deleteUser = () => async (
+ dispatch,
+ getState,
+ {getFirebase, getFirestore}
+) => {
+ const firebase = getFirebase();
+ const firestore = getFirestore();
+ const user = firebase.auth().currentUser;
+ const userId = getState().firebase.auth.uid;
+ dispatch({type: actions.PROFILE_DELETE_START});
+ try {
+  await firestore
+   .collection('users')
+   .doc(userId)
+   .delete();
+  await user.delete();
+ } catch (err) {
+  dispatch({type: actions.PROFILE_DELETE_FAIL, payload: err.message});
+ }
+};

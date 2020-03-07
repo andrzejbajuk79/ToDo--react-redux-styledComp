@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Formik, Field} from 'formik';
-import * as Yup from 'yup';
+
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions';
 import styled from 'styled-components';
@@ -9,31 +9,13 @@ import Input from '../../../components/Ui/Forms/Input/Input';
 import Button from '../../../components/Ui/Forms/Button/Button';
 import Message from '../../../components/Ui/Message/Message';
 import Heading from '../../../components/Ui/Headings/Heading';
+import {SignUpSchema} from './ValidationSchema';
+import {SignUpInitValues} from './InitialValues';
 
 const MessageWrapper = styled.div`
  position: absolute;
  bottom: 0;
 `;
-
-const SignUpSchema = Yup.object().shape({
- firstName: Yup.string()
-  .required('Name is required')
-  .min(3, 'too short')
-  .max(25, ' Maximum 25 characters'),
- lastName: Yup.string()
-  .required('Lastname is required')
-  .min(3, 'too short')
-  .max(25, ' Maximum 25 characters'),
- email: Yup.string()
-  .email('invalid email')
-  .required('Email is required'),
- password: Yup.string()
-  .required('Password is required')
-  .min(5),
- confirmPassword: Yup.string()
-  .oneOf([Yup.ref('password'), null], 'Password doesn`t match')
-  .required('You need to confirm password'),
-});
 
 const SignUp = ({signUp, cleanUp, loading, error}) => {
  useEffect(() => {
@@ -49,13 +31,7 @@ const SignUp = ({signUp, cleanUp, loading, error}) => {
     setSubmitting(false);
    }}
    validationSchema={SignUpSchema}
-   initialValues={{
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-   }}
+   initialValues={SignUpInitValues}
   >
    {({isSubmitting, isValid}) => (
     <FormWrapper>
