@@ -6,7 +6,8 @@ const WrappedModal = styled.div`
  position: fixed;
  top: 50%;
  left: 50%;
- transform: ${({opened}) => (opened ? 'translate(-50%, -50%)' : 'translate(-50%, -150%)')};
+ transform: ${({opened}) =>
+  opened ? 'translate(-50%, -50%)' : 'translate(-50%, -150%)'};
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -32,38 +33,22 @@ const InsideWrapper = styled.div`
  padding: 4rem 3rem;
 `;
 
-const Modal = ({opened, close, color, children}) => {
-  return ReactDOM.createPortal (
-    <Fragment>
-      <BackDrop close={close} opened={opened} />
-      <WrappedModal opened={opened} color={color}>
-        <InsideWrapper>{children}</InsideWrapper>
-      </WrappedModal>
-    </Fragment>,
-    document.getElementById ('root-modal')
+const Modal = React.memo(
+ ({opened, close, color, children}) => {
+  console.log('rendered');
+  return ReactDOM.createPortal(
+   <Fragment>
+    <BackDrop close={close} opened={opened} />
+    <WrappedModal opened={opened} color={color}>
+     <InsideWrapper>{children}</InsideWrapper>
+    </WrappedModal>
+   </Fragment>,
+   document.getElementById('root-modal')
   );
-};
+ },
+ (prevProps, nextProps) => {
+  return prevProps.opened === nextProps.opened; //zwraca true nie ma update
+ }
+);
 
 export default Modal;
-
-// const Modal = React.memo(
-//  ({opened, close, children}) => {
-//   return ReactDOM.createPortal(
-//    <>
-//     <BackDrop close={close} opened={opened} />
-//     <WrappedModal opened={opened}>
-//      <InsideWrapper>{children}</InsideWrapper>
-//     </WrappedModal>
-//    </>,
-//    document.getElementById('root-modal')
-//   );
-//  },
-//  (prevProps, nextProps) => {
-//   console.log('next', nextProps);
-//   console.log('next', prevProps);
-
-//   return prevProps.opened === nextProps.opened;
-//  }
-// );
-
-// export default Modal;

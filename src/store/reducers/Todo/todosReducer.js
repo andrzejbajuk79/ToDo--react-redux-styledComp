@@ -1,5 +1,5 @@
-import {createReducer} from './ReducerGen';
-import * as actions from '../actions/constants';
+import {createReducer} from '../ReducerGen';
+import * as actions from '../../actions/constants';
 const INITIAL_STATE = {
   error: null,
   loading: false,
