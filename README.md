@@ -1,6 +1,6 @@
 ## 
 # ZRODLO 
-**FIDALGO : *https://www.youtube.com/watch?v=J_SEMZKFxtw&list=PLoH-uUW2wEIQU3diUzrpFaFOcXM8z8gBc&index=4* **
+**FIDALGO** : *https://www.youtube.com/watch?v=J_SEMZKFxtw&list=PLoH-uUW2wEIQU3diUzrpFaFOcXM8z8gBc&index=4* 
 
 >**TORRENT: **
 
