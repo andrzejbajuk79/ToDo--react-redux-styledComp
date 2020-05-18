@@ -1,10 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 
+# ZRODLO 
+**FIDALGO : *https://www.youtube.com/watch?v=J_SEMZKFxtw&list=PLoH-uUW2wEIQU3diUzrpFaFOcXM8z8gBc&index=4* **
 
-## Available Scripts
-## FIDALGO
+>**TORRENT: **
 
-In the project directory, you can run:
 
-### `yarn start`
+# Zawartość
 
-https://www.youtube.com/watch?v=J_SEMZKFxtw&list=PLoH-uUW2wEIQU3diUzrpFaFOcXM8z8gBc&index=4
+####Preview
+![sass-js-coding-test screenshot](https://github.com/andrzejbajuk79/ToDo--react-redux-styledComp/blob/master/2020-05-18_11h17_32.png?raw=true)
+![sass-js-coding-test screenshot](https://github.com/andrzejbajuk79/ToDo--react-redux-styledComp/blob/master/2020-05-18_11h32_34.png?raw=true)
+
+
